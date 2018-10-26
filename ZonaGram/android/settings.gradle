@@ -1,0 +1,3 @@
+rootProject.name = 'ZonaGram'
+
+include ':app'
