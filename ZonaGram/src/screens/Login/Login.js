@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     logoContainer: {
         justifyContent: 'flex-start',
-        paddingTop: 60,
+        paddingTop: 15,
         alignItems: 'center',
         flexGrow: 1
     },
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         flex:4,
         paddingTop: 70,
         justifyContent:'flex-start',
+        
     },
     networkContainer:{
         marginTop:35

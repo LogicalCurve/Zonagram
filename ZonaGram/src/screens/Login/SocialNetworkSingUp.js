@@ -45,6 +45,6 @@ export default class SocialNetworkSingUp extends Component {
 
 const styles = StyleSheet.create({
     images: {
-        marginLeft: 60
+        marginLeft: 35
     },
 })

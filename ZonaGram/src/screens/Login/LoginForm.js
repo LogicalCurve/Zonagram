@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
         fontStyle:'italic'        
     },
     singUpContainer:{        
+        marginHorizontal: 110,
         alignItems:'center',
         justifyContent:'flex-start'        
     },
@@ -81,7 +82,5 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontSize:25,
         color:'#FFFFFF'
-        
-
     }
 });
