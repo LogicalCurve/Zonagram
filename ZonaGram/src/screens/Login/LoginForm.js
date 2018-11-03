@@ -6,10 +6,15 @@ import {
     TextInput,
     KeyboardAvoidingView,
     TouchableOpacity,
-    Text
+    Text,
+    Alert
 } from 'react-native';
 
 export default class LoginForm extends Component {
+
+    signUpClickListener () {
+        Alert.alert("Hello World");
+    }
 
     render() {
         return (
@@ -35,7 +40,7 @@ export default class LoginForm extends Component {
                     <Text style={styles.signInText}>Entrar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.singUpContainer} underlineColorAndroid=''>
-                    <Text style={styles.singUpText}>Cadastre-se</Text>
+                    <Text style={styles.singUpText} onPress={this.signUpClickListener}>Cadastre-se</Text>
                 </TouchableOpacity>
             </View>
         );

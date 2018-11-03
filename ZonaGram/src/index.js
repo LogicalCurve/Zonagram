@@ -11,12 +11,13 @@ import {
   View
 } from 'react-native';
 import Login from './screens/Login/Login';
+import Signup from './screens/Signup/Signup';
 
 
 export default class index extends Component {
   render() {
     return (
-      <Login />
+      <Signup />
     )
   }
 }
