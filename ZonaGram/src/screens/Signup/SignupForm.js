@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
     signUpContainer: {
         backgroundColor:'#FFCB30',
         marginBottom:15,
-        height: 50,
+        height: 45,
         justifyContent:'center',
         borderRadius:25,
-        marginHorizontal: 130
+        marginHorizontal: 120
     },
     signUnText: {
         textAlign:'center',
