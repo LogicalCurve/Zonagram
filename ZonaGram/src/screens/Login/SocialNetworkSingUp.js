@@ -15,7 +15,6 @@ export default class SocialNetworkSingUp extends Component {
             : require('../../images/googleLogo.png');
         return (
             <View>
-
                 <TouchableOpacity style={{
                     backgroundColor: this.props.colorOf,
                     borderRadius: 7,
@@ -23,9 +22,7 @@ export default class SocialNetworkSingUp extends Component {
                     marginBottom: 15,
                     height: 50,
                     flexDirection: 'row',
-
                     alignItems: 'center'
-
                 }}>
                     <Image source={icon} style={styles.images} />
                     <Text style={{
@@ -42,9 +39,8 @@ export default class SocialNetworkSingUp extends Component {
         );
     }
 }
-
 const styles = StyleSheet.create({
     images: {
-        marginLeft: 60
+        marginLeft: 40
     },
 })

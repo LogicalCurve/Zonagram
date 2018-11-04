@@ -10,7 +10,14 @@ import {
 } from 'react-native';
 
 export default class LoginForm extends Component {
+    
 
+    changeScreen(){
+        this.passwordInput.clear();
+        this.loginInput.clear();
+        console.warn('Mudando de tela');
+        
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -19,19 +26,22 @@ export default class LoginForm extends Component {
                     style={styles.input}
                     underlineColorAndroid='transparent'
                     autoCorrect={false}
-                    keyboardType='email-address'
                     autoCapitalize='none'
+                    keyboardType='email-address'                    
                     onSubmitEditing={() => this.passwordInput.focus()}
+                    ref={(input) => this.loginInput = input}
                 />
                 <TextInput
                     style={styles.input}
                     underlineColorAndroid='transparent'
                     placeholder='Senha'
                     autoCorrect={false}
+                    autoCapitalize='none'
                     secureTextEntry
                     ref={(input) => this.passwordInput = input}
+                    onSubmitEditing={()=> this.changeScreen()}
                 />
-                <TouchableOpacity style={styles.signInContainer}>
+                <TouchableOpacity style={styles.signInContainer} onPress={()=> this.changeScreen()}>
                     <Text style={styles.signInText}>Entrar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.singUpContainer} underlineColorAndroid=''>
@@ -43,16 +53,15 @@ export default class LoginForm extends Component {
 }
 
 const styles = StyleSheet.create({
-
     input: {
-        fontSize: 25,
+        fontSize: 20,
         fontStyle: 'italic',
         fontFamily:'helvetica',
-        marginHorizontal: 40,
+        marginHorizontal: 20,
         height: 50,
         backgroundColor: '#FFFFFF',
         marginBottom: 30,
-        borderRadius: 40,
+        borderRadius: 20,
         paddingLeft: 30,
         opacity: 1,
         textDecorationColor:'#DFE0E1'
@@ -60,10 +69,10 @@ const styles = StyleSheet.create({
     signInContainer: {
         backgroundColor:'#FFCB30',
         marginBottom:15,
-        height: 50,
+        height: 45,
         justifyContent:'center',
         borderRadius:25,
-        marginHorizontal: 130
+        marginHorizontal: 120
     },
     signInText: {
         textAlign:'center',
@@ -74,14 +83,14 @@ const styles = StyleSheet.create({
     },
     singUpContainer:{        
         alignItems:'center',
-        justifyContent:'flex-start'        
+        justifyContent:'flex-start',
+        marginHorizontal: 135,     
+        
     },
     singUpText:{
         textDecorationLine:'underline',
         textAlign:'center',
         fontSize:25,
-        color:'#FFFFFF'
-        
-
+        color:'#FFFFFF'        
     }
 });

@@ -12,35 +12,33 @@ import {
 
 import LoginForm from "./LoginForm";
 import SNSingUp from "./SocialNetworkSingUp"
-
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class Login extends Component {
-
     render() {
         return (
-            <ScrollView style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image source={require('../../images/logo.png')} style={styles.logo} />
-                </View>
-                <View style={styles.LoginFormContainer}>
+            <LinearGradient colors={['#192f6a','#3b5998','#4c669f']} style={styles.container} >
+                <ScrollView>
+                    <View style={styles.logoContainer}>
+                        <Image source={require('../../images/logo.png')} style={styles.logo} />
+                    </View>
+                    <View style={styles.LoginFormContainer}>
 
-                    <LoginForm />
-                </View>
-                <View style={styles.networkContainer}>
-                    <SNSingUp colorOf='#303357' imageOf='facebookLogo' networkName='Facebook' colorOfText='#FFFFFF' />
-                    <SNSingUp colorOf='#C0C3EC' imageOf='googleLogo' networkName='Google' colorOfText ='#303357' />
-                </View>
-
-            </ScrollView>
+                        <LoginForm />
+                    </View>
+                    <View style={styles.networkContainer}>
+                        <SNSingUp colorOf='#303357' imageOf='facebookLogo' networkName='Facebook' colorOfText='#FFFFFF' />
+                        <SNSingUp colorOf='#C0C3EC' imageOf='googleLogo' networkName='Google' colorOfText='#303357' />
+                    </View>
+                </ScrollView>
+            </LinearGradient>
         );
     }
 }
 const styles = StyleSheet.create({
-    container: {     
-        flex: 1,
-        backgroundColor: '#30A9FF',
-        
-        
+    container: {
+        flex: 1
+
     },
     logoContainer: {
         justifyContent: 'flex-start',
@@ -52,12 +50,12 @@ const styles = StyleSheet.create({
         // width: 330,
         // height: 80,
     },
-    LoginFormContainer:{
-        flex:4,
+    LoginFormContainer: {
+        flex: 4,
         paddingTop: 70,
-        justifyContent:'flex-start',
+        justifyContent: 'flex-start',
     },
-    networkContainer:{
-        marginTop:35
+    networkContainer: {
+        marginTop: 18
     }
 });
