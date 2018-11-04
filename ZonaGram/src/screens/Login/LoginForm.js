@@ -6,7 +6,8 @@ import {
     TextInput,
     KeyboardAvoidingView,
     TouchableOpacity,
-    Text
+    Text,
+    Alert
 } from 'react-native';
 
 export default class LoginForm extends Component {
@@ -45,7 +46,7 @@ export default class LoginForm extends Component {
                     <Text style={styles.signInText}>Entrar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.singUpContainer} underlineColorAndroid=''>
-                    <Text style={styles.singUpText}>Cadastre-se</Text>
+                    <Text style={styles.singUpText} onPress={this.signUpClickListener}>Cadastre-se</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontStyle:'italic'        
     },
-    singUpContainer:{        
+    singUpContainer:{                
         alignItems:'center',
         justifyContent:'flex-start',
         marginHorizontal: 135,     

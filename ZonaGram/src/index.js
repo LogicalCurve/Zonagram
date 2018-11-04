@@ -11,6 +11,7 @@ import {
   View
 } from 'react-native';
 import Login from './screens/Login/Login';
+import Signup from './screens/Signup/Signup';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -18,7 +19,8 @@ import { createStackNavigator } from 'react-navigation';
 export default class index extends Component {
   render() {
     return (      
-      <Login />
+      // <Login />    
+      <Signup />
     )
   }
 }
