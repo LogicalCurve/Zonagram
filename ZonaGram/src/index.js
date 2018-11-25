@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Login from './screens/Login/Login';
 import Signup from './screens/Signup/Signup';
-
+import Chat from './screens/Chat/Chat';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { createStackNavigator } from 'react-navigation';
@@ -20,7 +20,7 @@ export default class index extends Component {
   render() {
     return (      
       // <Login />    
-      <Signup />
+      <Chat />
     )
   }
 }
