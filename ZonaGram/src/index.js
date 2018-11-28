@@ -14,13 +14,27 @@ import Login from './screens/Login/Login';
 import Signup from './screens/Signup/Signup';
 
 import LinearGradient from 'react-native-linear-gradient';
+import { Navigator } from 'react-native-deprecated-custom-components';
 
-import { createStackNavigator } from 'react-navigation';
+
 export default class index extends Component {
   render() {
     return (      
-      // <Login />    
-      <Signup />
+      <Navigator
+        initialRoute={{id:'a'}}
+        renderScene={(route, navigator) => {
+            if(route.id === 'a'){
+              return(
+                <Login navigator={navigator} />
+              )
+            }
+            if(route.id === 'b'){
+              return(
+                <Signup navigator={navigator} />
+              )
+            }
+        }}
+      />
     )
   }
 }

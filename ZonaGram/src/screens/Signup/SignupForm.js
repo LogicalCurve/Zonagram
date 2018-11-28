@@ -59,7 +59,7 @@ export default class SignupForm extends Component {
                     secureTextEntry
                     ref={(input) => this.passwordInput = input}
                 />
-                <TouchableOpacity style={styles.signUpContainer}>
+                <TouchableOpacity  style={styles.signUpContainer}>
                     <Text style={styles.signUnText}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     input: {
+        padding:10,
         fontSize: 20,
         fontStyle: 'italic',
         fontFamily:'helvetica',

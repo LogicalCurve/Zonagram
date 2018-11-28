@@ -45,8 +45,8 @@ export default class LoginForm extends Component {
                 <TouchableOpacity style={styles.signInContainer} onPress={()=> this.changeScreen()}>
                     <Text style={styles.signInText}>Entrar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.singUpContainer} underlineColorAndroid=''>
-                    <Text style={styles.singUpText} onPress={this.signUpClickListener}>Cadastre-se</Text>
+                <TouchableOpacity style={styles.singUpContainer} onPress={()=>{this.props.navigator.push({id:'b'})}} underlineColorAndroid=''>
+                    <Text style={styles.singUpText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </View>
         );

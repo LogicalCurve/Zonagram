@@ -18,13 +18,13 @@ export default class Login extends Component {
     render() {
         return (
             <LinearGradient colors={['#192f6a','#3b5998','#4c669f']} style={styles.container} >
-                <ScrollView>
+                <ScrollView>                    
                     <View style={styles.logoContainer}>
                         <Image source={require('../../images/logo.png')} style={styles.logo} />
                     </View>
                     <View style={styles.LoginFormContainer}>
 
-                        <LoginForm />
+                        <LoginForm navigator={this.props.navigator} />
                     </View>
                     <View style={styles.networkContainer}>
                         <SNSingUp colorOf='#303357' imageOf='facebookLogo' networkName='Facebook' colorOfText='#FFFFFF' />
@@ -36,9 +36,8 @@ export default class Login extends Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-
+    container: {        
+        flex:1
     },
     logoContainer: {
         justifyContent: 'flex-start',

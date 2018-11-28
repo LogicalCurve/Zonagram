@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-deprecated-custom-components": "^0.1.2",
     "react-native-linear-gradient": "^2.4.3",
     "react-native-update-gradle": "^1.0.2",
     "react-navigation": "^2.18.2"
