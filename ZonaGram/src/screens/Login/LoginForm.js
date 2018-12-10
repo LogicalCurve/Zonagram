@@ -10,6 +10,8 @@ import {
     Alert
 } from 'react-native';
 
+import{Actions} from 'react-native-router-flux';
+
 export default class LoginForm extends Component {
     
 
@@ -45,7 +47,7 @@ export default class LoginForm extends Component {
                 <TouchableOpacity style={styles.signInContainer} onPress={()=> this.changeScreen()}>
                     <Text style={styles.signInText}>Entrar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.singUpContainer} onPress={()=>{this.props.navigator.push({id:'b'})}} underlineColorAndroid=''>
+                <TouchableOpacity style={styles.singUpContainer} onPress={()=>{Actions.singUp()}} underlineColorAndroid=''>
                     <Text style={styles.singUpText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </View>
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
     singUpContainer:{                
         alignItems:'center',
         justifyContent:'flex-start',
-        marginHorizontal: 135,     
+            
         
     },
     singUpText:{

@@ -21,6 +21,7 @@ export default class SocialNetworkSingUp extends Component {
                     marginHorizontal: 20,
                     marginBottom: 15,
                     height: 50,
+                    
                     flexDirection: 'row',
                     alignItems: 'center'
                 }}>

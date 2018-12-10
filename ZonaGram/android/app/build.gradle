@@ -73,7 +73,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+    entryFile: "index.js",
+    bundleInRelease: true
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -107,6 +108,28 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs{
+        release{
+            if(project.hasProperty('APP_RELEASE_STORE_FILE')){
+                storeFile file(APP_RELEASE_STORE_FILE)
+                storePassword APP_RELEASE_STORE_PASSWORD
+                keyAlias APP_RELEASE_KEY_ALIAS
+                keyPassword APP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+    subprojects {
+        project.configurations.all {
+            afterEvaluate {project ->
+                if (project.hasProperty("android")) {
+                    android {
+                        compileSdkVersion 27
+                        buildToolsVersion '27.0.3'
+                    }
+                }
+            }
+        }
+    }
     splits {
         abi {
             reset()
@@ -119,6 +142,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release

@@ -7,10 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "firebase": "^5.6.0",
     "react": "16.3.1",
     "react-native": "0.55.4",
     "react-native-deprecated-custom-components": "^0.1.2",
     "react-native-linear-gradient": "^2.4.3",
+    "react-native-router-flux": "^4.0.6",
     "react-native-update-gradle": "^1.0.2",
     "react-navigation": "^2.18.2"
   },

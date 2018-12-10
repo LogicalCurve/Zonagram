@@ -1,57 +1,23 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import Login from './screens/Login/Login';
-import Signup from './screens/Signup/Signup';
-import Chat from './screens/Chat/Chat';
-import LinearGradient from 'react-native-linear-gradient';
-import { Navigator } from 'react-native-deprecated-custom-components';
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader','Setting a timer']);
+import Routes from './Routes.js'
 
+
+import initializeFirabase from './firebaseConfig.js'
 
 export default class index extends Component {
+
+  componentWillMount() {
+    initializeFirabase();
+    
+  }
+
+
   render() {
-    return (      
-      <Navigator
-        initialRoute={{id:'a'}}
-        renderScene={(route, navigator) => {
-            if(route.id === 'a'){
-              return(
-                <Login navigator={navigator} />
-              )
-            }
-            if(route.id === 'b'){
-              return(
-                <Signup navigator={navigator} />
-              )
-            }
-        }}
-      />
+    return (
+      <Routes />
     )
   }
 }
 
-var styles = StyleSheet.create({
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5
-  },
-  buttonText: {
-    fontSize: 18,
-    fontFamily: 'Gill Sans',
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
-  },
-});
