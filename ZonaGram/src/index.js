@@ -10,9 +10,7 @@ export default class index extends Component {
 
   componentWillMount() {
     initializeFirabase();
-    
   }
-
 
   render() {
     return (
@@ -20,4 +18,3 @@ export default class index extends Component {
     )
   }
 }
-

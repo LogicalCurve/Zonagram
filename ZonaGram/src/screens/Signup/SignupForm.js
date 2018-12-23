@@ -24,9 +24,8 @@ export default class SignupForm extends Component {
             passwordConfer: ''
         }
         this.singUpUser.bind();
-        
     }
-    
+
     singUpUser() {
         try {
             this.verifications();
@@ -52,13 +51,13 @@ export default class SignupForm extends Component {
         }
         const auth = firebase.auth();
         var s = this.state;
-        auth.createUserWithEmailAndPassword(s.email,s.password);                
-        
-        
+        auth.createUserWithEmailAndPassword(s.email,s.password);
+
+
         this.clearFields();
         Actions.pop();
     }
-    
+
     verifications() {
         var s = this.state;
         if (!(s.password === s.passwordConfer)) {
@@ -111,7 +110,7 @@ export default class SignupForm extends Component {
                     style={styles.input}
                     underlineColorAndroid='transparent'
                     autoCorrect={true}
-                    
+
                     autoCapitalize='none'
                     onChangeText={(email) => this.setState({ email: email })}
                     ref={(input) => this.emailInput = input}

@@ -18,14 +18,14 @@ import LinearGradient from 'react-native-linear-gradient';
 
 
 export default class Login extends Component {
-    
+
     render() {
-        
+
         return (
             <LinearGradient colors={['#192f6a', '#3b5998', '#4c669f']} style={styles.container} >
             <KeyboardAvoidingView>
 
-                <ScrollView  >                    
+                <ScrollView  >
                         <View style={styles.logoContainer}>
                             <Image source={require('../../images/logo.png')} style={styles.logo} />
                         </View>
@@ -35,7 +35,7 @@ export default class Login extends Component {
                         <View style={styles.networkContainer}>
                             <SNSingUp colorOf='#303357' imageOf='facebookLogo' networkName='Facebook' colorOfText='#FFFFFF' />
                             <SNSingUp colorOf='#C0C3EC' imageOf='googleLogo' networkName='Google' colorOfText='#303357' />
-                        </View>                
+                        </View>
                 </ScrollView>
             </KeyboardAvoidingView>
             </LinearGradient>

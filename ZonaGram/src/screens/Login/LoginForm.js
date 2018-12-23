@@ -13,13 +13,12 @@ import {
 import{Actions} from 'react-native-router-flux';
 
 export default class LoginForm extends Component {
-    
+
 
     changeScreen(){
         this.passwordInput.clear();
-        this.loginInput.clear();
-        console.warn('Mudando de tela');
-        
+        this.loginInput.clear
+        Actions.chat();
     }
     render() {
         return (
@@ -30,7 +29,7 @@ export default class LoginForm extends Component {
                     underlineColorAndroid='transparent'
                     autoCorrect={false}
                     autoCapitalize='none'
-                    keyboardType='email-address'                    
+                    keyboardType='email-address'
                     onSubmitEditing={() => this.passwordInput.focus()}
                     ref={(input) => this.loginInput = input}
                 />
@@ -82,18 +81,18 @@ const styles = StyleSheet.create({
         color:'#2276B3',
         fontSize: 30,
         fontWeight:'bold',
-        fontStyle:'italic'        
+        fontStyle:'italic'
     },
-    singUpContainer:{                
+    singUpContainer:{
         alignItems:'center',
         justifyContent:'flex-start',
-            
-        
+
+
     },
     singUpText:{
         textDecorationLine:'underline',
         textAlign:'center',
         fontSize:25,
-        color:'#FFFFFF'        
+        color:'#FFFFFF'
     }
 });
