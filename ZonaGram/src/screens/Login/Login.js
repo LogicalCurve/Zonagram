@@ -22,8 +22,7 @@ export default class Login extends Component {
         return (
             <LinearGradient colors={['#192f6a', '#3b5998', '#4c669f']} style={styles.container} >
             <KeyboardAvoidingView>
-
-                <ScrollView  >
+                <ScrollView>
                         <View style={styles.logoContainer}>
                             <Image source={require('../../images/logo.png')} style={styles.logo} />
                         </View>

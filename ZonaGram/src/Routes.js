@@ -8,11 +8,11 @@ import Chat from './screens/Chat/Chat';
 export default props => (
     <Router >
         <Stack key='login'>
+            <Scene key='chat' component={Chat} />
+
             <Scene hideNavBar key='login' component={Login} />
 
             <Scene navigationBarStyle={{backgroundColor:'#192f6a'}} navBarButtonColor='#FFF' titleStyle={{color:'#FFF'}} title='Cadastro' key='singUp' component={Singup} />
-
-            <Scene key='chat' component={Chat} />
         </Stack>
     </Router>
 );
