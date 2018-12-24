@@ -10,8 +10,6 @@ import {
     ScrollView
 } from 'react-native';
 
-
-
 import LoginForm from "./LoginForm";
 import SNSingUp from "./SocialNetworkSingUp"
 import LinearGradient from 'react-native-linear-gradient';
