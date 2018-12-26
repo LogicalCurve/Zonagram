@@ -10,7 +10,8 @@ import {
     ScrollView,
     Button,
     TouchableOpacity,
-    WebView
+    BackHandler,
+    Keyboard
 } from 'react-native';
 import EmojiSelector from 'react-native-emoji-selector'
 
@@ -25,7 +26,7 @@ let emojiKeyBoard = 0;
 export default class Chat extends Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', flagImage: false, emojiSelector: false};
+        this.state = {text: '', flagImage: false, emojiSelector: false, flagImageEmoji: false};
         isSendingText = false;
         isSendingAudio = false;
         isReceiving = false;
@@ -40,6 +41,15 @@ export default class Chat extends Component {
         this.setState({text: text});
     }
 
+    onChangeEmoji(emoji){
+        if ( emoji.length >= 1 ){
+            this.setState({flagImage: true});
+        }else{
+            this.setState({flagImage: false});
+        }
+        this.setState({text: this.state.text + emoji});
+    }
+
     onPressSend = () =>{
         userMessage = this.state.text;
         isSendingText = this.state.flagImage;
@@ -47,14 +57,20 @@ export default class Chat extends Component {
         this.setState({text: '', flagImage: false});
     }
 
-    emojiSelectorStyle = function(){
-        return {flex: emojiKeyBoard};
+    onPressEmoji = () =>{
+        if ( !this.state.emojiSelector ){
+            var dismissKeyboard = require('dismissKeyboard');
+            dismissKeyboard();
+        }
+        this.setState({emojiSelector: !this.state.emojiSelector, flagImageEmoji: !this.state.flagImageEmoji});
     }
 
     render() {
-        let icon = this.state.flagImage
+        let iconSendButton = this.state.flagImage
             ? require('../../images/send.png')
             : require('../../images/mic.png');
+
+        let iconEmoji = this.state.flagImageEmoji ? require('../../images/insertEmoticonSelected.png') : require('../../images/insertEmoticon.png');
 
         if ( isSendingText  ){
             messageBrowser.push(<View key={messageBrowser.length}><Message own={true} message={userMessage} /></View>);
@@ -67,10 +83,6 @@ export default class Chat extends Component {
         if ( isReceiving ){
             messageBrowser.push(<View key={messageBrowser.length}><Message own={false} message={"Aqui vem as mensagens que serão recebidas de outro usuário"} user="Alguém" /></View>);
             isReceiving = false;
-        }
-
-        if ( this.state.emojiSelector ){
-            emojiKeyBoard = 3;
         }
 
         return (
@@ -87,9 +99,9 @@ export default class Chat extends Component {
                     <View style={styles.textMessageContainer}>
                         <View>
                             <TouchableOpacity
-                                onPress={(emojiSelector) => this.setState({emojiSelector})}
+                                onPress={this.onPressEmoji}
                             >
-                                <Image source={require('../../images/insertEmoticon.png')} />
+                                <Image source={iconEmoji} />
                             </TouchableOpacity>
                         </View>
                         <View style={{flex:4}}>
@@ -114,14 +126,24 @@ export default class Chat extends Component {
                                 style={styles.buttonMessage}
                                 onPress={this.onPressSend}
                             >
-                                <Image source={icon} />
+                                <Image source={iconSendButton} />
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <View style={this.emojiSelectorStyle()}>
-                    <EmojiSelector onEmojiSelected={emoji => console.warn(emoji)} />
-                </View>
+                { this.state.emojiSelector && <View style={{flex: 3}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+                        <TouchableOpacity
+                            style={{ width: 36, height: 36, borderRadius: 36, marginRight: 20, backgroundColor: '#ed2e2e'}}
+                            onPress={this.onPressEmoji}
+                        >
+                            <Image source={require('../../images/arrowDown.png')} />
+                        </TouchableOpacity>
+                    </View>
+                    <EmojiSelector
+                        onEmojiSelected={emoji => this.onChangeEmoji(emoji)}
+                        />
+                </View> }
             </View>
         );
     }
@@ -134,8 +156,15 @@ const styles = StyleSheet.create({
     messagesContainer: {
         flex: 1,
         backgroundColor: '#FFFFFF',
-        margin: 10,
-        borderRadius: 10
+        marginTop: 5,
+        marginLeft: 8,
+        marginRight: 8,
+        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 6,
     },
     textMessageContainer: {
         flexDirection:'row',
@@ -160,12 +189,12 @@ const styles = StyleSheet.create({
     },
     buttonMessage: {
         borderWidth:1,
-        borderColor:'rgba(0,0,0,0.2)',
+        borderColor:'#0D65A4',
         alignItems:'center',
         justifyContent:'center',
         width:60,
         height:60,
-        backgroundColor:'#5A6AE8',
+        backgroundColor:'#2180C3',
         borderRadius:60,
         margin: -2
     }
