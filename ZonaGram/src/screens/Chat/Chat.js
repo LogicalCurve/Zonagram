@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         elevation: 6,
     },
     textMessageContainer: {
-        flexDirection:'row',
+        flexDirection: 'row',
         width: window.width,
         margin: 5,
         padding: 6,

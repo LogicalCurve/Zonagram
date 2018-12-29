@@ -12,10 +12,20 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 
-export default class ProfileItem extends Component { 
+export default class ProfileItem extends Component {
+
+	lastMessages() {
+		
+		
+		
+
+		return 
+	}
+
 	render() {
 		let type = this.props.type;
-
+		let lastMessages = this.props.lastMessages;
+		
 		if ( type === undefined ){
 			type = 'NONE';
 		}else{
@@ -37,16 +47,27 @@ export default class ProfileItem extends Component {
 			color = ['grey', 'grey'];
 		}
 
+		let messageList = [];
+		if ( lastMessages instanceof Array){
+			for (var i = 0; i < lastMessages.length && i < 3; i++) {
+				if ( lastMessages[i] instanceof Array ){
+					messageList.push(<View key={i} style={{flexDirection: 'row'}}><Text style={{fontSize: 16, color: 'blue'}}>{lastMessages[i][0] + ': '}</Text><Text style={{fontSize: 16}}>{lastMessages[i][1]}</Text></View>);
+				}
+			};
+			
+		}
+
 		return (
-			<View style={styles.containter}>
+			<View style={styles.container}>
 				<LinearGradient colors={color} style={styles.profile} >
 					<View style={{flex: 1, backgroundColor: '#FFF', borderRadius: 56}}>
 
 					</View>
 				</LinearGradient>
 				
-				<View>
-
+				<View style={{paddingLeft: 8}}>
+					<Text style={{fontSize: 24}}>{this.props.title}</Text>
+					{messageList}
 				</View>
 			</View>
 		);
@@ -55,11 +76,13 @@ export default class ProfileItem extends Component {
 
 const styles = StyleSheet.create({
 	container: {
+		flexDirection: 'row',
 		flex: 1,
-		backgroundColor: '#EBEBEB'
+		width: window.width,
+		marginBottom: 10
 	},
 	profile: {
-		padding: 4,
+		padding: 3,
 		width: 112,
 		height: 112,
 		borderRadius: 56
