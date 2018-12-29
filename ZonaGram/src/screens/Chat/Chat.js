@@ -134,7 +134,7 @@ export default class Chat extends Component {
                 { this.state.emojiSelector && <View style={{flex: 3}}>
                     <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
                         <TouchableOpacity
-                            style={{ width: 36, height: 36, borderRadius: 36, marginRight: 20, backgroundColor: '#ed2e2e'}}
+                            style={{ width: 36, height: 36, borderRadius: 36, marginRight: 20, backgroundColor: '#AF2424'}}
                             onPress={this.onPressEmoji}
                         >
                             <Image source={require('../../images/arrowDown.png')} />
