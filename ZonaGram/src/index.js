@@ -9,7 +9,7 @@ import initializeFirabase from './firebaseConfig.js'
 export default class index extends Component {
 
   componentWillMount() {
-    initializeFirabase();
+    initializeFirabase();    
   }
 
   render() {

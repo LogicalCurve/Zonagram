@@ -70,7 +70,9 @@ export default class Chat extends Component {
             ? require('../../images/send.png')
             : require('../../images/mic.png');
 
-        let iconEmoji = this.state.flagImageEmoji ? require('../../images/insertEmoticonSelected.png') : require('../../images/insertEmoticon.png');
+        let iconEmoji = this.state.flagImageEmoji 
+            ? require('../../images/insertEmoticonSelected.png') 
+            : require('../../images/insertEmoticon.png');
 
         if ( isSendingText  ){
             messageBrowser.push(<View key={messageBrowser.length}><Message own={true} message={userMessage} /></View>);
