@@ -10,6 +10,7 @@ import {
     ScrollView
 } from 'react-native';
 
+import {Actions} from 'react-native-router-flux';
 import ProfileItem from './ProfileItem';
 
 export default class Main extends Component {
@@ -17,7 +18,7 @@ export default class Main extends Component {
     return (
         <View style={styles.containter}>
             <ScrollView style={styles.profiles}>
-                <ProfileItem type='GROUP' title='Grupo 1' lastMessages={[['José', 'Mensagem 1'], ['João', 'Mensagem 2'], ['Maria', 'Mensagem 3'], ['Pedro', 'Mensagem 4 será descartada pelo algoritmo.']]}/>
+                <ProfileItem onPress={() => {Actions.chat()}} type='GROUP' title='Grupo 1' lastMessages={[['José', 'Mensagem 1'], ['João', 'Mensagem 2'], ['Maria', 'Mensagem 3'], ['Pedro', 'Mensagem 4 será descartada pelo algoritmo.']]}/>
                 <ProfileItem type='HOTGROUP' title='Grupo Dinâmico 1' />
                 <ProfileItem type='USER' title='Usuário 1'/>
                 <ProfileItem type='ANONYMOUS' title='Usuário Anônimo #1' />

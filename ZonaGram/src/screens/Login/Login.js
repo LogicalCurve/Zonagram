@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     networkContainer: {
-
         flex: 1,
         marginTop: 18
     }

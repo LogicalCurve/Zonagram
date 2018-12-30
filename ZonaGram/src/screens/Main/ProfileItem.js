@@ -7,21 +7,13 @@ import {
 	Image,
 	TextInput,
 	KeyboardAvoidingView,
-	ScrollView
+	ScrollView,
+	TouchableOpacity
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
 export default class ProfileItem extends Component {
-
-	lastMessages() {
-		
-		
-		
-
-		return 
-	}
-
 	render() {
 		let type = this.props.type;
 		let lastMessages = this.props.lastMessages;
@@ -54,11 +46,10 @@ export default class ProfileItem extends Component {
 					messageList.push(<View key={i} style={{flexDirection: 'row'}}><Text style={{fontSize: 16, color: 'blue'}}>{lastMessages[i][0] + ': '}</Text><Text style={{fontSize: 16}}>{lastMessages[i][1]}</Text></View>);
 				}
 			};
-			
 		}
 
 		return (
-			<View style={styles.container}>
+			<TouchableOpacity onPress={this.props.onPress} style={styles.container}>
 				<LinearGradient colors={color} style={styles.profile} >
 					<View style={{flex: 1, backgroundColor: '#FFF', borderRadius: 56}}>
 
@@ -69,7 +60,7 @@ export default class ProfileItem extends Component {
 					<Text style={{fontSize: 24}}>{this.props.title}</Text>
 					{messageList}
 				</View>
-			</View>
+			</TouchableOpacity>
 		);
 	}
 }
