@@ -11,11 +11,17 @@ import {
     Button
 } from 'react-native';
 
+const firebase = require('firebase');
+
 import LinearGradient from 'react-native-linear-gradient';
+import { auth } from 'firebase';
 
 export default class Chat extends Component {
+    constructor(props){
+        super(props);
+    }
     sendMessage() {
-        return ( alert('send the message'));
+        auth.signOut();
     }
 
     render() {

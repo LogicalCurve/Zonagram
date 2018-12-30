@@ -19,6 +19,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 export default class Login extends Component {
     
+    
     render() {
         
         return (

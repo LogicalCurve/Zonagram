@@ -52,7 +52,7 @@ export default class SignupForm extends Component {
         }
         const auth = firebase.auth();
         var s = this.state;
-        auth.createUserWithEmailAndPassword(s.email,s.password);                
+        var obj = auth.createUserWithEmailAndPassword(s.email,s.password);                
         
         
         this.clearFields();
