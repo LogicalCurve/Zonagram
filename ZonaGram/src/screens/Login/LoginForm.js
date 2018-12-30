@@ -14,7 +14,6 @@ const firebase = require('firebase');
 import { Actions } from 'react-native-router-flux';
 
 export default class LoginForm extends Component {
-    auth = undefined;
 
     constructor(props) {
         super(props);
@@ -26,29 +25,29 @@ export default class LoginForm extends Component {
         }
         this.signIn.bind();
     }
-    componentWillMount(){
-        if(this.user){
-            alert(this.state.user);
-            // Actions.Chat({text:this.state.text});
-        }
-    }
-    componentDidMount() {
-        this.auth = firebase.auth();
-        this.auth.onAuthStateChanged((signedUser) => {
-            if (signedUser) {
-                alert(this.state.user);
-                this.setState({
-                    user: signedUser                   
-                });
-                 Actions.chat();
-            } else {
-                this.setState({
-                    user: undefined
-                });
+    // componentWillMount(){
+    //     if(this.user){
+    //         alert(this.state.user);
+    //         // Actions.Chat({text:this.state.text});
+    //     }
+    // }
+    // componentDidMount() {
+    //     this.auth = firebase.auth();
+    //     this.auth.onAuthStateChanged(async (signedUser) => {
+    //         if (signedUser) {
+    //             alert(this.state.user);
+    //             this.setState({
+    //                 user: signedUser                   
+    //             });
+    //             await Actions.chat();
+    //         } else {
+    //             this.setState({
+    //                 user: undefined
+    //             });
 
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
     signIn() {
         this.auth = firebase.auth();
         
