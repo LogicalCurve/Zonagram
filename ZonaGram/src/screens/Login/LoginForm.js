@@ -48,6 +48,7 @@ export default class LoginForm extends Component {
     //         }
     //     });
     // }
+
     signIn() {
         this.auth = firebase.auth();
         
@@ -91,7 +92,10 @@ export default class LoginForm extends Component {
                     ref={(input) => this.passwordInput = input}
                     onSubmitEditing={() => this.signIn()}
                 />
-                <TouchableOpacity style={styles.signInContainer} onPress={() => this.signIn()}>
+                {/*<TouchableOpacity style={styles.signInContainer} onPress={() => this.signIn()}>
+                    <Text style={styles.signInText}>Entrar</Text>
+                </TouchableOpacity>*/}
+                <TouchableOpacity style={styles.signInContainer} onPress={() => {Actions.main()}}>
                     <Text style={styles.signInText}>Entrar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.signUpContainer} onPress={() => {Actions.signUp()}} underlineColorAndroid=''>

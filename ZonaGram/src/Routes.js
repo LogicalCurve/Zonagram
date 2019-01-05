@@ -11,7 +11,7 @@ export default props => (
     <Router >
         <Stack key='login'>
             <Scene hideNavBar initial key='login' component={Login} />
-            <Scene key='main' component={Main} />
+            <Scene hideNavBar key='main' component={Main} />
             <Scene navigationBarStyle={{ backgroundColor: '#192f6a' }} navBarButtonColor='#FFF' titleStyle={{ color: '#FFF' }} title='Cadastro' key='signUp' component={Signup} />
             <Scene hideNavBar key='login' component={Login} />
             <Scene key='chat' component={Chat}/>
