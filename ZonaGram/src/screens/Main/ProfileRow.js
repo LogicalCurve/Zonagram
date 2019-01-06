@@ -17,6 +17,7 @@ export default class ProfileItem extends Component {
 	render() {
 		let type = this.props.type;
 		let lastMessages = this.props.lastMessages;
+		let notifications = this.props.notifications;
 		
 		if ( type === undefined ){
 			type = 'NONE';
@@ -43,16 +44,32 @@ export default class ProfileItem extends Component {
 		if ( lastMessages instanceof Array){
 			for (var i = 0; i < lastMessages.length && i < 3; i++) {
 				if ( lastMessages[i] instanceof Array ){
-					messageList.push(<View key={i} style={{flexDirection: 'row'}}><Text style={{fontSize: 16, color: 'blue'}}>{lastMessages[i][0] + ': '}</Text><Text style={{fontSize: 16}}>{lastMessages[i][1]}</Text></View>);
+					messageList.push(<View key={i} style={{flexDirection: 'row'}}><Text style={{fontSize: 16, color: '#2180C3', width:90, textAlign: 'right'}} numberOfLines={1} ellipsizeMode={'tail'}>{lastMessages[i][0]}</Text><Text style={{fontSize: 16, color: '#2180C3'}}> : </Text><Text style={{fontSize: 16, width:180}} numberOfLines={1} ellipsizeMode={'tail'}>{lastMessages[i][1]}</Text></View>);
 				}
 			};
+		}
+
+		if ( notifications != undefined && notifications > 0 && notifications < 100 ){
+			notifications = (
+				<View style={{position: 'absolute', right: 0, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', marginTop: 65, borderRadius: 40, backgroundColor: '#E65050'}}>
+					<Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>{notifications}</Text>
+				</View>
+			);
+		}else if ( notifications != undefined && notifications >= 100 ){
+			notifications = (
+				<View style={{position: 'absolute', right: 0, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', marginTop: 65, borderRadius: 40, backgroundColor: '#E65050'}}>
+					<Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>99+</Text>
+				</View>
+			);
+		}else{
+			notifications = '';
 		}
 
 		return (
 			<TouchableOpacity onPress={this.props.onPress} style={styles.container}>
 				<LinearGradient colors={color} style={styles.profile} >
 					<View style={{flex: 1, backgroundColor: '#FFF', borderRadius: 56}}>
-
+						{notifications}
 					</View>
 				</LinearGradient>
 				
@@ -70,7 +87,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flex: 1,
 		width: window.width,
-		marginBottom: 10
+		padding: 10,
+		borderBottomColor: '#C3C3C3',
+        borderBottomWidth: 1,
 	},
 	profile: {
 		padding: 3,
