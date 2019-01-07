@@ -21,20 +21,23 @@ export default class Chat extends Component {
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-        let message1 = [true, 'Hey', '10:50', '05/01/2019'];
-        let message2 = [false, 'José Araújo', 'Oi', '12:35', '05/01/2019'];
-        let message3 = [true, 'Tudo bem?', '13:15', '05/01/2019'];
-        let message4 = [false, 'José Araújo', 'Tudo ótimo e vc?', '13:15', '05/01/2019'];
-        let message5 = [true, 'Tudo ótimo também.', '13:16', '05/01/2019'];
-        let message6 = [true, 'Você sabia que o Zonagram vai ser o melhor app de todos?', '13:17', '05/01/2019'];
-        let message7 = [true, 'Vai ser uma nova experiência para mensagens e tudo mais!', '13:17', '05/01/2019'];
-        let message8 = [false, 'José Araújo', 'Sério?', '13:18', '06/01/2019'];
-        let message9 = [false, 'José Araújo', 'Ouvi dizer que tá TOP', '13:18', '06/01/2019'];
-        let message10 = [false, 'José Araújo', 'Será que vai ter grupos legais?', '13:20', '06/01/2019'];
-        let message11 = [true, 'Mas é claro que vai!', '13:21', '06/01/2019'];
-        let message12 = [true, 'os devs estão guardando uma bela surpresa para esse APP!', '13:21', '06/01/2019'];
+        let message0 = ['date', '05/01/2019'];
+        let message1 = ['own', 'Hey', '10:50'];
+        let message2 = ['partner', 'José Araújo', 'Oi', '12:35'];
+        let message3 = ['own', 'Tudo bem?', '13:15'];
+        let message4 = ['partner', 'José Araújo', 'Tudo ótimo e vc?', '13:15'];
+        let message5 = ['own', 'Tudo ótimo também.', '13:16'];
+        let message6 = ['own', 'Você sabia que o Zonagram vai ser o melhor app de todos?', '13:17'];
+        let message7 = ['own', 'Vai ser uma nova experiência para mensagens e tudo mais!', '13:17'];
+        let message8 = ['partner', 'José Araújo', 'Sério?', '13:18'];
+        let message9 = ['date', '06/01/2019'];
+        let message10 = ['partner', 'José Araújo', 'Ouvi dizer que tá TOP', '13:18'];
+        let message11 = ['partner', 'José Araújo', 'Será que vai ter grupos legais?', '13:20'];
+        let message12 = ['own', 'Mas é claro que vai!', '13:21'];
+        let message13 = ['own', 'os devs estão guardando uma bela surpresa para esse APP!', '13:21'];
 
-        this.state = {text: '', flagImage: false, emojiSelector: false, flagImageEmoji: false, dataSource: ds.cloneWithRows([message1, message2, message3, message4, message5, message6, message7, message8, message9, message10, message11, message12])};
+        this.state = {text: '', flagImage: false, emojiSelector: false, flagImageEmoji: false, dataSource: ds.cloneWithRows([message0, message1, message2, message3, message4, message5, message6, message7, message8, message9, message10, message11, message12, message13])};
+        //this.state = {text: '', flagImage: false, emojiSelector: false, flagImageEmoji: false, dataSource: ds.cloneWithRows([])};
     }
 
     onChangeText(text){
@@ -58,14 +61,21 @@ export default class Chat extends Component {
     onPressSend = () =>{
         let userMessage = this.state.text;
         this.setState({text: '', flagImage: false});
-
+        send = true;
         // Sending Text
         if ( this.state.flagImage  ){
             let now = new Date();
-            var newDs = this.state.dataSource['_dataBlob']['s1'];
-            newDs.push([true, userMessage, now.getHours() + ':' + now.getMinutes(), now.getDay() + '/' + now.getMonth() + '/' + now.getFullYear()]);
+            let time = ("0" + String(now.getHours())).slice(-2) + ':' + ("0" + String(now.getMinutes())).slice(-2);
+            let date = ("0" + String(now.getDate())).slice(-2) + '/' + ("0" + String((now.getMonth() + 1))).slice(-2) + '/' + now.getFullYear();
+            var newDataSource = this.state.dataSource['_dataBlob']['s1'];
+
+            if ( currentDate === undefined || date != currentDate ){
+                newDataSource.push(['date', date]);
+            }
+
+            newDataSource.push(['own', userMessage, time]);
             this.setState({
-              dataSource: this.state.dataSource.cloneWithRows(newDs)
+              dataSource: this.state.dataSource.cloneWithRows(newDataSource)
             });
         }else{ // Sending audio
             console.warn("Sending audio...");
@@ -82,38 +92,27 @@ export default class Chat extends Component {
 
     renderMessages(rowData){
         // If it is a own message
-        if ( rowData[0] ){
-            if ( currentDate == null || currentDate != rowData[3] ){
-                currentDate = rowData[3];
-                return (
-                    <View>
-                        <Text style={{textAlign: 'center'}}>{currentDate}</Text>
-                        <MessageRow own={rowData[0]} message={rowData[1]} time={rowData[2]} />
-                    </View>
-                );
-            }else{
-                return (
-                    <View>
-                        <MessageRow own={rowData[0]} message={rowData[1]} time={rowData[2]} />
-                    </View>
-                );
+        if ( rowData[0].toLowerCase() === 'own' ){
+            return (
+                <View>
+                    <MessageRow own={true} message={rowData[1]} time={rowData[2]} />
+                </View>
+            );
+        }else if ( rowData[0].toLowerCase() === 'partner' ){
+            return (
+                <View>
+                    <MessageRow own={false} user={rowData[1]} message={rowData[2]} time={rowData[3]} />
+                </View>
+            );
+        }else if ( rowData[0].toLowerCase() === 'date' ){
+            if ( currentDate === undefined || rowData[1] != currentDate ){
+                currentDate = rowData[1];
             }
-        }else{
-            if ( currentDate == null || currentDate != rowData[4] ){
-                currentDate = rowData[4];
-                return (
-                    <View>
-                        <Text style={{textAlign: 'center'}}>{currentDate}</Text>
-                        <MessageRow own={rowData[0]} user={rowData[1]} message={rowData[2]} time={rowData[3]} />
-                    </View>
-                );
-            }else{
-                return (
-                    <View>
-                        <MessageRow own={rowData[0]} user={rowData[1]} message={rowData[2]} time={rowData[3]} />
-                    </View>
-                );
-            }
+            return (
+                <View style={{borderBottomWidth: 1, borderColor: '#BEBDBD', padding: 2}}>
+                    <Text style={{textAlign: 'center'}}>{rowData[1]}</Text>
+                </View>
+            );
         }
     }
 
@@ -139,6 +138,7 @@ export default class Chat extends Component {
                             style={{flex: 1}} 
                             dataSource={this.state.dataSource}
                             renderRow={this.renderMessages.bind(this)}
+                            enableEmptySections={true}
                         />
                     </ScrollView>
                     <View style={styles.textMessageContainer}>
