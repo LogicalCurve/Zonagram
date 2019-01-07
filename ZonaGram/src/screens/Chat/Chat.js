@@ -1,35 +1,40 @@
 import React, { Component } from 'react';
 import {
-    Platform,
     StyleSheet,
-    Text,
     View,
     Image,
+    Text,
     TextInput,
-    KeyboardAvoidingView,
     ScrollView,
-    Button,
     TouchableOpacity,
-    BackHandler,
-    Keyboard
+    ListView
 } from 'react-native';
 import EmojiSelector from 'react-native-emoji-selector'
 
-import Message from './Message';
+import MessageRow from './MessageRow';
 
-let userMessage = "";
-let receivedMessage = "";
-let messageBrowser = [];
-let isSendingText, isSendingAudio, isReceiving;
-let emojiKeyBoard = 0;
+let currentDate;
 
 export default class Chat extends Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', flagImage: false, emojiSelector: false, flagImageEmoji: false};
-        isSendingText = false;
-        isSendingAudio = false;
-        isReceiving = false;
+
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+        let message1 = [true, 'Hey', '10:50', '05/01/2019'];
+        let message2 = [false, 'José Araújo', 'Oi', '12:35', '05/01/2019'];
+        let message3 = [true, 'Tudo bem?', '13:15', '05/01/2019'];
+        let message4 = [false, 'José Araújo', 'Tudo ótimo e vc?', '13:15', '05/01/2019'];
+        let message5 = [true, 'Tudo ótimo também.', '13:16', '05/01/2019'];
+        let message6 = [true, 'Você sabia que o Zonagram vai ser o melhor app de todos?', '13:17', '05/01/2019'];
+        let message7 = [true, 'Vai ser uma nova experiência para mensagens e tudo mais!', '13:17', '05/01/2019'];
+        let message8 = [false, 'José Araújo', 'Sério?', '13:18', '06/01/2019'];
+        let message9 = [false, 'José Araújo', 'Ouvi dizer que tá TOP', '13:18', '06/01/2019'];
+        let message10 = [false, 'José Araújo', 'Será que vai ter grupos legais?', '13:20', '06/01/2019'];
+        let message11 = [true, 'Mas é claro que vai!', '13:21', '06/01/2019'];
+        let message12 = [true, 'os devs estão guardando uma bela surpresa para esse APP!', '13:21', '06/01/2019'];
+
+        this.state = {text: '', flagImage: false, emojiSelector: false, flagImageEmoji: false, dataSource: ds.cloneWithRows([message1, message2, message3, message4, message5, message6, message7, message8, message9, message10, message11, message12])};
     }
 
     onChangeText(text){
@@ -51,10 +56,20 @@ export default class Chat extends Component {
     }
 
     onPressSend = () =>{
-        userMessage = this.state.text;
-        isSendingText = this.state.flagImage;
-        isSendingAudio = !this.state.flagImage;
+        let userMessage = this.state.text;
         this.setState({text: '', flagImage: false});
+
+        // Sending Text
+        if ( this.state.flagImage  ){
+            let now = new Date();
+            var newDs = this.state.dataSource['_dataBlob']['s1'];
+            newDs.push([true, userMessage, now.getHours() + ':' + now.getMinutes(), now.getDay() + '/' + now.getMonth() + '/' + now.getFullYear()]);
+            this.setState({
+              dataSource: this.state.dataSource.cloneWithRows(newDs)
+            });
+        }else{ // Sending audio
+            console.warn("Sending audio...");
+        }
     }
 
     onPressEmoji = () =>{
@@ -63,6 +78,43 @@ export default class Chat extends Component {
             dismissKeyboard();
         }
         this.setState({emojiSelector: !this.state.emojiSelector, flagImageEmoji: !this.state.flagImageEmoji});
+    }
+
+    renderMessages(rowData){
+        // If it is a own message
+        if ( rowData[0] ){
+            if ( currentDate == null || currentDate != rowData[3] ){
+                currentDate = rowData[3];
+                return (
+                    <View>
+                        <Text style={{textAlign: 'center'}}>{currentDate}</Text>
+                        <MessageRow own={rowData[0]} message={rowData[1]} time={rowData[2]} />
+                    </View>
+                );
+            }else{
+                return (
+                    <View>
+                        <MessageRow own={rowData[0]} message={rowData[1]} time={rowData[2]} />
+                    </View>
+                );
+            }
+        }else{
+            if ( currentDate == null || currentDate != rowData[4] ){
+                currentDate = rowData[4];
+                return (
+                    <View>
+                        <Text style={{textAlign: 'center'}}>{currentDate}</Text>
+                        <MessageRow own={rowData[0]} user={rowData[1]} message={rowData[2]} time={rowData[3]} />
+                    </View>
+                );
+            }else{
+                return (
+                    <View>
+                        <MessageRow own={rowData[0]} user={rowData[1]} message={rowData[2]} time={rowData[3]} />
+                    </View>
+                );
+            }
+        }
     }
 
     render() {
@@ -74,19 +126,6 @@ export default class Chat extends Component {
             ? require('../../images/insertEmoticonSelected.png') 
             : require('../../images/insertEmoticon.png');
 
-        if ( isSendingText  ){
-            messageBrowser.push(<View key={messageBrowser.length}><Message own={true} message={userMessage} /></View>);
-            isSendingText = false;
-        }else if (isSendingAudio){
-            console.warn("Sending audio...");
-            isSendingAudio = false;
-        }
-
-        if ( isReceiving ){
-            messageBrowser.push(<View key={messageBrowser.length}><Message own={false} message={"Aqui vem as mensagens que serão recebidas de outro usuário"} user="Alguém" /></View>);
-            isReceiving = false;
-        }
-
         return (
             <View style={styles.container}>
                 <View style={{flex: 2}}>
@@ -96,7 +135,11 @@ export default class Chat extends Component {
                         onContentSizeChange={(contentWidth, contentHeight)=>{
                             this.scrollView.scrollToEnd({animated: true});
                         }}>
-                        {messageBrowser}
+                        <ListView
+                            style={{flex: 1}} 
+                            dataSource={this.state.dataSource}
+                            renderRow={this.renderMessages.bind(this)}
+                        />
                     </ScrollView>
                     <View style={styles.textMessageContainer}>
                         <View>

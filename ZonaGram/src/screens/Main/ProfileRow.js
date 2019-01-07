@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import {
-	Platform,
 	StyleSheet,
 	Text,
 	View,
-	Image,
-	TextInput,
-	KeyboardAvoidingView,
-	ScrollView,
 	TouchableOpacity
 } from 'react-native';
 
