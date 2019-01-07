@@ -20,8 +20,9 @@ export default class SocialNetworkSingUp extends Component {
                     borderRadius: 7,
                     marginHorizontal: 20,
                     marginBottom: 15,
-                    height: 50,
-                    
+                    minHeight: 50,
+                    maxHeight: 60,
+                    padding: 20,
                     flexDirection: 'row',
                     alignItems: 'center'
                 }}>
@@ -41,7 +42,5 @@ export default class SocialNetworkSingUp extends Component {
     }
 }
 const styles = StyleSheet.create({
-    images: {
-        marginLeft: 40
-    },
+    
 })

@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         height: 45,
         justifyContent: 'center',
         borderRadius: 25,
-        marginHorizontal: 120
+        marginHorizontal: 100
     },
     signInText: {
         textAlign: 'center',
@@ -137,9 +137,7 @@ const styles = StyleSheet.create({
     },
     signUpContainer: {
         alignItems: 'center',
-        justifyContent: 'flex-start',
-
-
+        justifyContent: 'flex-start'
     },
     signUpText: {
         textDecorationLine: 'underline',

@@ -3,10 +3,14 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TouchableOpacity
+	TouchableOpacity,
+	Dimensions
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
+
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
 export default class ProfileItem extends Component {
 	render() {
@@ -39,25 +43,30 @@ export default class ProfileItem extends Component {
 		if ( lastMessages instanceof Array){
 			for (var i = 0; i < lastMessages.length && i < 3; i++) {
 				if ( lastMessages[i] instanceof Array ){
-					messageList.push(<View key={i} style={{flexDirection: 'row'}}><Text style={{fontSize: 16, color: '#2180C3', width:90, textAlign: 'right'}} numberOfLines={1} ellipsizeMode={'tail'}>{lastMessages[i][0]}</Text><Text style={{fontSize: 16, color: '#2180C3'}}> : </Text><Text style={{fontSize: 16, width:180}} numberOfLines={1} ellipsizeMode={'tail'}>{lastMessages[i][1]}</Text></View>);
+					messageList.push(
+						<View key={i} style={{flexDirection: 'row'}}>
+							<Text style={{fontSize: 16, color: '#2180C3', width:90, textAlign: 'right'}} numberOfLines={1} ellipsizeMode={'tail'}>{lastMessages[i][0]}</Text>
+							<Text style={{fontSize: 16, color: '#2180C3'}}> : </Text>
+							<Text style={{fontSize: 16, width:width - 230}} numberOfLines={1} ellipsizeMode={'tail'}>{lastMessages[i][1]}</Text>
+						</View>);
 				}
 			};
 		}
 
 		if ( notifications != undefined && notifications > 0 && notifications < 100 ){
 			notifications = (
-				<View style={{position: 'absolute', right: 0, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', marginTop: 65, borderRadius: 40, backgroundColor: '#E65050'}}>
+				<View style={{position: 'absolute', right: 1, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', marginTop: 52, borderRadius: 40, backgroundColor: '#E65050'}}>
 					<Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>{notifications}</Text>
 				</View>
 			);
 		}else if ( notifications != undefined && notifications >= 100 ){
 			notifications = (
-				<View style={{position: 'absolute', right: 0, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', marginTop: 65, borderRadius: 40, backgroundColor: '#E65050'}}>
+				<View style={{position: 'absolute', right: 1, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', marginTop: 52, borderRadius: 40, backgroundColor: '#E65050'}}>
 					<Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>99+</Text>
 				</View>
 			);
 		}else{
-			notifications = '';
+			notifications = <View></View>;
 		}
 
 		return (
@@ -69,7 +78,7 @@ export default class ProfileItem extends Component {
 				</LinearGradient>
 				
 				<View style={{paddingLeft: 8}}>
-					<Text style={{fontSize: 24}}>{this.props.title}</Text>
+					<Text style={{fontSize: 24, width: width - 130}} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.title}</Text>
 					{messageList}
 				</View>
 			</TouchableOpacity>
@@ -87,9 +96,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
 	},
 	profile: {
-		padding: 3,
-		width: 112,
-		height: 112,
+		padding: 4,
+		width: 100,
+		height: 100,
 		borderRadius: 56
 	}
 });

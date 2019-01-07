@@ -61,7 +61,6 @@ export default class Chat extends Component {
     onPressSend = () =>{
         let userMessage = this.state.text;
         this.setState({text: '', flagImage: false});
-        send = true;
         // Sending Text
         if ( this.state.flagImage  ){
             let now = new Date();

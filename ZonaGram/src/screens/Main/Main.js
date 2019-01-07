@@ -23,10 +23,10 @@ export default class Main extends Component {
 
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-      let menssages = [['José Araújo', 'Mensagem 1'], ['João Bartolomeu', 'Mensagem 2'], ['Maria Aparecida', 'Mensagem 3'], ['Pedro de Jesus', 'Mensagem 4 será descartada pelo algoritmo.']];
-      let item1 = ['Group 1', 'HOTGROUP', menssages, 100];
+      let menssages = [['José Araújo', 'Mensagem 1 aaaaaaaaaaaaaaaaaaaaa'], ['João Bartolomeu', 'Mensagem 2'], ['Maria Aparecida', 'Mensagem 3'], ['Pedro de Jesus', 'Mensagem 4 será descartada pelo algoritmo.']];
+      let item1 = ['Group 1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa', 'HOTGROUP', menssages, 100];
       let item2 = ['Group 2', 'GROUP', menssages, 2];
-      let item3 = ['Usuário 1', 'USER', menssages, 3];
+      let item3 = ['Usuário 1', 'USER', menssages];
       let item4 = ['Anônimo 1', 'ANONYMOUS', menssages, 4];
       let item5 = ['Group 2', 'HOTGROUP', menssages, 9];
       this.state = {scrollY: new Animated.Value(0), dataSource: ds.cloneWithRows([item1, item2, item3, item4, item5])};
